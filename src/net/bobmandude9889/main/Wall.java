@@ -1,7 +1,5 @@
 package net.bobmandude9889.main;
 
-import com.sun.javafx.geom.Vec2f;
-
 public class Wall {
 
 	Vec2f p1;

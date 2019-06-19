@@ -1,4 +1,4 @@
-package net.bobmandude9889.main;
+package net.bobmandude9889.doomEngine.World;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,18 +7,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import com.sun.javafx.geom.Vec2f;
-
-import net.bobmandude9889.main.Map.Sector;
+import net.bobmandude9889.doomEngine.World.World.Sector;
+import net.bobmandude9889.main.Vec2f;
 
 public class MapLoader {
 
-	
-	public static Map load(String mapName) throws FileNotFoundException {
+	public static World load(String mapName) throws FileNotFoundException {
 		List<Vec2f> vertices = new ArrayList<>();
 		List<Sector> sectors = new ArrayList<>();
 		Vec2f playerLocation = null;
-		float playerAngle = 0;
+		Vec2f playerAngle = null;
+		float playerAngleX = 0;
 		int playerSector = 0;
 		
 		File mapFile = null;
@@ -57,11 +56,12 @@ public class MapLoader {
 				line = line.replaceAll("player[ ]+", "");
 				String[] nums = line.split("[ ]+");
 				playerLocation = new Vec2f(Float.parseFloat(nums[0]), Float.parseFloat(nums[1]));
-				playerAngle = Float.parseFloat(nums[2]);
+				playerAngleX = Float.parseFloat(nums[2]);
+				playerAngle = new Vec2f(playerAngleX, 0);
 				playerSector = Integer.parseInt(nums[3]);
 			}
 		}
 		in.close();
-		return new Map(vertices, sectors, playerLocation, playerAngle, playerSector);
+		return new World(vertices, sectors, playerLocation, playerAngle, playerSector);
 	}
 }
