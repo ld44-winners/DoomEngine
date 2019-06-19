@@ -45,7 +45,7 @@ public class Renderer {
 	public void render(BufferStrategy bs) {
 		Graphics g = bs.getDrawGraphics();
 		
-		if (slowMode) {
+		if (slowMode || lineMode) {
 			g.setColor(Color.BLACK);
 			g.fillRect(0, 0, width, height);
 		}

@@ -48,7 +48,7 @@ public class Main {
 	
 		InputListener inputs = null;
 		try {
-			inputs = new InputListener(world);
+			inputs = new InputListener(world, frame);
 		} catch (AWTException e) {
 			System.exit(0);
 		}

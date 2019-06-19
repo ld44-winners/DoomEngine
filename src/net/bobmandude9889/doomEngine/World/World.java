@@ -1,8 +1,10 @@
 package net.bobmandude9889.doomEngine.World;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import net.bobmandude9889.doomEngine.World.World.Sector;
 import net.bobmandude9889.main.Vec2f;
 
 public class World {
@@ -48,6 +50,30 @@ public class World {
 		System.out.println("PlayerLocation: " + playerLocation);
 		System.out.println("playerAngle: " + playerAngle);
 		System.out.println("playerSector: " + playerSector);
+	}
+
+	private boolean sectorContainsPoint(Sector sector, Vec2f point) {
+		int i;
+		int j;
+		boolean result = false;
+		for (i = 0, j = sector.vertices.length - 1; i < sector.vertices.length; j = i++) {
+			if ((vertices.get(sector.vertices[i]).y > point.y) != (vertices.get(sector.vertices[j]).y > point.y)
+					&& (point.x < (vertices.get(sector.vertices[j]).x - vertices.get(sector.vertices[i]).x) * (point.y - vertices.get(sector.vertices[i]).y) / (vertices.get(sector.vertices[j]).y - vertices.get(sector.vertices[i]).y)
+							+ vertices.get(sector.vertices[i]).x)) {
+				result = !result;
+			}
+		}
+		return result;
+	}
+
+	public List<Integer> getPossibleSectors(Vec2f point) {
+		List<Integer> possible = new ArrayList<>();
+		for (Sector sector : sectors) {
+			if (sectorContainsPoint(sector, point)) {
+				possible.add(sectors.indexOf(sector));
+			}
+		}
+		return possible;
 	}
 
 	public boolean onSegment(Vec2f p, Vec2f q, Vec2f r) {
@@ -102,6 +128,11 @@ public class World {
 				}
 			}
 		}
+		
+		if (!getPossibleSectors(moveTo).contains(playerSector)) {
+			moveTo = playerLocation;
+		}
+		
 		this.playerLocation = moveTo;
 	}
 
