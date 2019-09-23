@@ -1,4 +1,4 @@
-package net.bobmandude9889.main;
+package net.bobmandude9889.doomEngine.main;
 
 import java.awt.AWTException;
 import java.awt.Point;

@@ -1,4 +1,4 @@
-package net.bobmandude9889.main;
+package net.bobmandude9889.doomEngine.main;
 
 import java.awt.AWTException;
 import java.awt.Color;
@@ -12,7 +12,7 @@ import java.io.FileNotFoundException;
 
 import javax.swing.JFrame;
 
-import net.bobmandude9889.doomEngine.World.MapLoader;
+import net.bobmandude9889.doomEngine.World.ResourceLoader;
 import net.bobmandude9889.doomEngine.World.World;
 
 public class Main {
@@ -25,6 +25,8 @@ public class Main {
 	public static Renderer renderer;
 
 	public static void main(String[] args) {
+		
+		
 		JFrame frame = new JFrame("Doom Engine");
 		frame.setSize(width, height);
 		frame.setResizable(false);
@@ -41,7 +43,7 @@ public class Main {
 		
 		World world = null;
 		try {
-			world = MapLoader.load("map.txt");
+			world = ResourceLoader.loadMap("map.txt");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}

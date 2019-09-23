@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import net.bobmandude9889.doomEngine.World.World.Sector;
-import net.bobmandude9889.main.Vec2f;
+import net.bobmandude9889.doomEngine.main.Vec2f;
 
 public class World {
 

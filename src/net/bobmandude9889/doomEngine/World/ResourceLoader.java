@@ -1,18 +1,38 @@
 package net.bobmandude9889.doomEngine.World;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.imageio.ImageIO;
+
 import net.bobmandude9889.doomEngine.World.World.Sector;
-import net.bobmandude9889.main.Vec2f;
+import net.bobmandude9889.doomEngine.main.Vec2f;
 
-public class MapLoader {
+public class ResourceLoader {
 
-	public static World load(String mapName) throws FileNotFoundException {
+	public static BufferedImage loadImage(String imageName) {
+		File imageFile = null;
+		try {
+			imageFile = new File(ClassLoader.getSystemResource("res/" + imageName).toURI());
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+			return null;
+		}
+		
+		try {
+			return ImageIO.read(imageFile);
+		} catch (IOException e) {
+			return null;
+		}
+	}
+	
+	public static World loadMap(String mapName) throws FileNotFoundException {
 		List<Vec2f> vertices = new ArrayList<>();
 		List<Sector> sectors = new ArrayList<>();
 		Vec2f playerLocation = null;
